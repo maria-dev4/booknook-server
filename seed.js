@@ -97,11 +97,21 @@ const run = async () => {
   const books = client.db("booknook").collection("books");
   const now = Date.now();
   let added = 0;
+  let updated = 0;
 
   for (let i = 0; i < list.length; i++) {
     const [title, author, category, file, description] = list[i];
     const exists = await books.findOne({ title });
-    if (exists) continue;
+
+    if (exists) {
+      await books.updateOne(
+        { title },
+        { $set: { addedByEmail: OWNER_EMAIL, addedByName: OWNER_NAME } },
+      );
+      updated++;
+      continue;
+    }
+
     await books.insertOne({
       title,
       author,
@@ -116,7 +126,7 @@ const run = async () => {
     added++;
   }
 
-  console.log(`${added} books added`);
+  console.log(`${added} books added, ${updated} books updated`);
   await client.close();
 };
 

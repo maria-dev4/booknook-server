@@ -1,8 +1,8 @@
 import "dotenv/config";
 import { MongoClient } from "mongodb";
 
-const OWNER_EMAIL = "আপনার_লগইনের_ইমেইল";
-const OWNER_NAME = "আপনার_নাম";
+const OWNER_EMAIL = "maria423000@gmail.com";
+const OWNER_NAME = "Maria";
 
 const list = [
   [
@@ -60,6 +60,34 @@ const list = [
     "Fiction",
     "midnight-library.jpg",
     "Between life and death sits a library of every life you could have lived, and one chance to choose a different one.",
+  ],
+  [
+    "Tomorrow, and Tomorrow, and Tomorrow",
+    "Gabrielle Zevin",
+    "Fiction",
+    "tomorrow-tomorrow.jpg",
+    "Two friends turn their love of video games into a studio, and spend three decades building worlds, rivalries and a bond that outlasts them all.",
+  ],
+  [
+    "Piranesi",
+    "Susanna Clarke",
+    "Fiction",
+    "piranesi.jpg",
+    "A man lives in an endless house of statues and tides, keeping a journal of its wonders until a mystery begins to unravel his world.",
+  ],
+  [
+    "Klara and the Sun",
+    "Kazuo Ishiguro",
+    "Science",
+    "klara-sun.jpg",
+    "An artificial friend watches the world from a shop window and learns what it truly means to love and to be loved.",
+  ],
+  [
+    "Braiding Sweetgrass",
+    "Robin Wall Kimmerer",
+    "Science",
+    "braiding-sweetgrass.jpg",
+    "A botanist weaves Indigenous wisdom and scientific knowledge into a gentle book about the gifts the living world offers us.",
   ],
 ];
 

@@ -64,14 +64,16 @@ app.get("/books/:id", async (req, res) => {
 });
 
 app.post("/books", verifyToken, async (req, res) => {
+  const error = validateBook(req.body, 1);
+  if (error) return res.status(400).send({ message: error });
   const { title, author, category, image, description, copies, addedByName } =
     req.body;
   const result = await books.insertOne({
-    title,
-    author,
+    title: String(title).trim(),
+    author: String(author).trim(),
     category,
     image,
-    description,
+    description: String(description).trim(),
     copies: Number(copies),
     addedByName,
     addedByEmail: req.user.email,
@@ -84,16 +86,18 @@ app.patch("/books/:id", verifyToken, async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(400).send({ message: "Invalid book id" });
   }
+  const error = validateBook(req.body, 0);
+  if (error) return res.status(400).send({ message: error });
   const { title, author, category, image, description, copies } = req.body;
   const result = await books.updateOne(
     { _id: new ObjectId(req.params.id), addedByEmail: req.user.email },
     {
       $set: {
-        title,
-        author,
+        title: String(title).trim(),
+        author: String(author).trim(),
         category,
         image,
-        description,
+        description: String(description).trim(),
         copies: Number(copies),
       },
     },

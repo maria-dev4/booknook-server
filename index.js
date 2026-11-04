@@ -48,7 +48,7 @@ const validateBook = (body, minCopies) => {
 app.get("/books", async (req, res) => {
   const filter = {};
   if (req.query.email) filter.addedByEmail = req.query.email;
-  const limit = parseInt(req.query.limit) || 0;
+  const limit = Math.min(parseInt(req.query.limit) || 0, 50);
   const cursor = books.find(filter).sort({ createdAt: -1 });
   if (limit) cursor.limit(limit);
   res.send(await cursor.toArray());

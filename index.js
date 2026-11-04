@@ -31,6 +31,20 @@ app.get("/", (req, res) => {
   res.send("BookNook server is running");
 });
 
+const categories = ["Fiction", "Science", "History", "Kids", "Others"];
+
+const validateBook = (body, minCopies) => {
+  const { title, author, category, image, description, copies } = body;
+  if (!title || !author || !image || !description) {
+    return "All book fields are required";
+  }
+  if (!categories.includes(category)) return "Invalid category";
+  if (!Number.isInteger(Number(copies)) || Number(copies) < minCopies) {
+    return "Copies must be a valid number";
+  }
+  return "";
+};
+
 app.get("/books", async (req, res) => {
   const filter = {};
   if (req.query.email) filter.addedByEmail = req.query.email;
